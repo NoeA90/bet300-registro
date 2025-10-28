@@ -8,90 +8,73 @@
 <style>
 :root{
   --bg:#0b1130; --card:#121935; --card2:#0f1530; --border:#1b2450;
-  --text:#eaf0ff; --muted:#9aa6d1; --accent:#ff9a3d; --accent2:#22d3ee; --ok:#25D366;
+  --text:#eaf0ff; --muted:#9aa6d1; --accent:#f6cf58; --accent2:#22d3ee; --ok:#25D366;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0; color:var(--text); font:16px/1.4 Inter,system-ui,-apple-system,Segoe UI,Roboto;
   background: var(--bg);
-  /* patrón suave tipo casino */
   background-image:
     radial-gradient(transparent 68%, rgba(255,255,255,.02) 70%),
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><g fill="none" stroke="%231a2350" stroke-width="2" opacity="0.55"><path d="M20,60 c0,-15 20,-15 20,0 c0,15 -20,15 -20,0z"/><rect x="50" y="45" width="20" height="30" rx="4"/><path d="M95,45 l10,15 -10,15 -10,-15z"/></g></svg>');
   background-size: 100% 100%, 280px 280px;
   background-attachment: fixed;
 }
-.container{
-  min-height:100%;
-  display:grid; place-items:center; padding:24px 14px;
-}
+.container{min-height:100%;display:grid;place-items:center;padding:24px 14px}
 .card{
-  width:min(560px, 92vw);
-  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
-  border:1px solid var(--border);
-  border-radius:18px; padding:18px 16px 16px;
-  box-shadow: 0 18px 60px rgba(0,0,0,.40);
+  width:min(560px,92vw);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));
+  border:1px solid var(--border);border-radius:18px;padding:18px 16px 16px;
+  box-shadow:0 18px 60px rgba(0,0,0,.40)
 }
-.logoWrap{display:flex; justify-content:center; margin-bottom:12px}
-.logoWrap img{height:64px; width:auto; filter: drop-shadow(0 4px 10px rgba(0,0,0,.35))}
-h1{margin:0 0 8px; font-size:22px; text-align:center; letter-spacing:.2px}
-.sub{color:var(--muted); text-align:center; font-size:13px; margin-bottom:10px}
+.logoWrap{display:flex;justify-content:center;margin-bottom:12px}
+.logoWrap img{height:64px;width:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+h1{margin:0 0 8px;font-size:22px;text-align:center;letter-spacing:.2px}
+.sub{color:var(--muted);text-align:center;font-size:13px;margin-bottom:10px}
 
 .field{margin:10px 0}
-.label{font-size:13px; color:var(--muted); margin:0 0 6px}
+.label{font-size:13px;color:var(--muted);margin:0 0 6px}
 .control{
-  position:relative;
-  border-radius:12px; border:1px solid var(--border); background:var(--card2);
-  display:flex; align-items:center; padding:6px 10px;
+  position:relative;border-radius:12px;border:1px solid var(--border);background:var(--card2);
+  display:flex;align-items:center;padding:6px 10px
 }
-.input{
-  outline:none; border:none; background:transparent; color:var(--text);
-  font-size:16px; width:100%; padding:8px 6px;
-}
-.eye{
-  cursor:pointer; user-select:none; font-size:18px; opacity:.8;
-}
+.input{outline:none;border:none;background:transparent;color:var(--text);font-size:16px;width:100%;padding:8px 6px}
+.eye{cursor:pointer;user-select:none;font-size:18px;opacity:.8}
 .eye:hover{opacity:1}
 
+/* Botón mostaza (como el logo) */
 .btn{
-  width:100%; appearance:none; border:none; cursor:pointer;
-  margin-top:12px; padding:13px 14px; border-radius:12px; font-weight:800;
-  background:linear-gradient(90deg,var(--accent),#ff5c39); color:#0b0f1e;
-  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  width:100%;appearance:none;border:none;cursor:pointer;margin-top:12px;padding:13px 14px;border-radius:12px;font-weight:800;
+  background:linear-gradient(90deg,#f6cf58,#f0b52e);
+  color:#1a1400; text-shadow:0 1px 0 rgba(255,255,255,.35);
+  box-shadow:0 10px 24px rgba(0,0,0,.35)
 }
-.btn:disabled{opacity:.6; cursor:not-allowed}
-.row{display:flex; gap:8px; flex-wrap:wrap}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btn:hover{filter:brightness(1.02)}
+
+.row{display:flex;gap:8px;flex-wrap:wrap}
 .btnGhost{
-  flex:1 1 160px;
-  background:transparent; color:var(--text);
-  border:1px solid var(--border); padding:12px; border-radius:12px; font-weight:700; cursor:pointer;
+  flex:1 1 160px;background:transparent;color:var(--text);
+  border:1px solid var(--border);padding:12px;border-radius:12px;font-weight:700;cursor:pointer
 }
 
-.note{margin-top:10px; font-size:12px; color:var(--muted); text-align:center}
+.note{margin-top:10px;font-size:12px;color:var(--muted);text-align:center}
 
 /* resultado */
 .result{
-  margin-top:12px; display:none;
-  border:1px dashed var(--border); border-radius:12px; padding:10px;
-  background:rgba(37,211,102,.06);
+  margin-top:12px;display:none;border:1px dashed var(--border);border-radius:12px;padding:10px;
+  background:rgba(246,207,88,.06)
 }
-.badge{
-  display:inline-block; padding:4px 8px; border-radius:10px; background:rgba(34,211,238,.14);
-  color:#b8f4ff; font-weight:800; border:1px solid rgba(34,211,238,.25)
-}
-.copy{
-  display:inline-flex; align-items:center; gap:6px; cursor:pointer; user-select:none;
-  background:#0b1228; border:1px solid var(--border); padding:6px 8px; border-radius:8px; font-size:13px;
-}
-.toast{ position:fixed; left:50%; transform:translateX(-50%); bottom:22px; background:#0f1530; border:1px solid var(--border); padding:10px 14px; border-radius:12px; color:var(--text); box-shadow:0 10px 26px rgba(0,0,0,.45); display:none}
+.badge{display:inline-block;padding:4px 8px;border-radius:10px;background:rgba(34,211,238,.14);color:#b8f4ff;font-weight:800;border:1px solid rgba(34,211,238,.25)}
+.copy{display:inline-flex;align-items:center;gap:6px;cursor:pointer;user-select:none;background:#0b1228;border:1px solid var(--border);padding:6px 8px;border-radius:8px;font-size:13px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;background:#0f1530;border:1px solid var(--border);padding:10px 14px;border-radius:12px;color:var(--text);box-shadow:0 10px 26px rgba(0,0,0,.45);display:none}
 </style>
 </head>
 <body>
 <div class="container">
   <div class="card">
     <div class="logoWrap">
-      <!-- Reemplazá el archivo por tu logo -->
       <img src="logo-bet300.png" alt="BET300"/>
     </div>
     <h1>Registrate para ingresar</h1>
@@ -124,11 +107,10 @@ h1{margin:0 0 8px; font-size:22px; text-align:center; letter-spacing:.2px}
 
     <div class="note">Usá el link con <b>?pc=1</b>, <b>?pc=2</b>, <b>?pc=3</b> o <b>?pc=4</b> para que envíe al WhatsApp correcto.</div>
 
-    <!-- resultado -->
     <div id="resultBox" class="result">
       <div><b>Registro enviado.</b> Código: <span id="codeBox" class="copy" title="Copiar"></span></div>
-      <div style="margin-top:6px; font-size:13px">Si WhatsApp no abre, copiá y pegá este texto al operador:</div>
-      <div id="msgBox" style="margin-top:6px; font-size:13px; word-break:break-word"></div>
+      <div style="margin-top:6px;font-size:13px">Si WhatsApp no abre, copiá y pegá este texto al operador:</div>
+      <div id="msgBox" style="margin-top:6px;font-size:13px;word-break:break-word"></div>
     </div>
   </div>
 </div>
@@ -136,15 +118,14 @@ h1{margin:0 0 8px; font-size:22px; text-align:center; letter-spacing:.2px}
 <div id="toast" class="toast">Copiado</div>
 
 <script>
-/* ===================== CONFIGURACIÓN ===================== */
-/* WhatsApp por PC (formato internacional sin + ni espacios) */
+/* ====== CONFIG WHATSAPP (formato wa.me) ====== */
 const WP = {
-  pc1: "5491134970581",
+  pc1: "5491171561685",
   pc2: "5491171561022",
-  pc3: "5491127996237",
+  pc3: "5491134970581",
   pc4: "5491135854862",
 };
-/* ========================================================= */
+/* ============================================ */
 
 const qs = new URLSearchParams(location.search);
 const pcParam = (qs.get('pc')||'1').trim();
@@ -163,35 +144,24 @@ const dlCsv = document.getElementById('dlCsv');
 const clearForm = document.getElementById('clearForm');
 const toast = document.getElementById('toast');
 
-/* util */
+/* utils */
 const uid = (n=10)=> (crypto.randomUUID?.() : (Date.now()+"-"+Math.random())).replace(/[^a-z0-9]/gi,"").slice(0,n).toUpperCase();
 const nowStr = ()=> new Date().toLocaleString();
-
-/* ver/ocultar pass */
-toggleEye.addEventListener('click', ()=>{
-  passEl.type = passEl.type === 'password' ? 'text' : 'password';
-});
-
-/* copiar helper */
-function copy(text){
-  navigator.clipboard?.writeText(text).then(()=>{
+function copy(t){
+  navigator.clipboard?.writeText(t).then(()=>{
     toast.style.display='block'; setTimeout(()=>toast.style.display='none',900);
   }).catch(()=>{
-    // fallback
-    const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
+    const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
     ta.select(); document.execCommand('copy'); ta.remove();
     toast.style.display='block'; setTimeout(()=>toast.style.display='none',900);
   });
 }
+toggleEye.addEventListener('click', ()=>{ passEl.type = passEl.type === 'password' ? 'text' : 'password'; });
 
-/* local save */
 function saveLocal(reg){
-  const arr = JSON.parse(localStorage.getItem('regs')||'[]');
-  arr.unshift(reg);
+  const arr = JSON.parse(localStorage.getItem('regs')||'[]'); arr.unshift(reg);
   localStorage.setItem('regs', JSON.stringify(arr));
 }
-
-/* armar mensaje */
 function buildMsg(reg){
   return `BET300 - Registro nuevo
 Código: ${reg.code}
@@ -204,40 +174,37 @@ TS: ${reg.ts}
 Por favor crear/verificar el usuario y confirmar acceso.`;
 }
 
-/* enviar */
 sendBtn.addEventListener('click', ()=>{
   const user = (userEl.value||"").trim();
   const pass = (passEl.value||"").trim();
   const phone = (phoneEl.value||"").trim().replace(/\D/g,"");
 
-  if(!user || !pass || !phone){
-    alert("Completá usuario, contraseña y teléfono.");
-    return;
-  }
-  if(phone.length < 8){ alert("Revisá el teléfono (solo números)."); return; }
+  if(!user || !pass || !phone){ alert("Completá usuario, contraseña y teléfono."); return; }
+  if(phone.length<8){ alert("Revisá el teléfono (solo números)."); return; }
 
   const code = uid(10);
   const reg = {code, user, pass, phone, pc: pcKey.toUpperCase(), ts: nowStr()};
   saveLocal(reg);
 
-  // preparar mensaje y abrir WhatsApp
   const msg = buildMsg(reg);
   const wpNumber = WP[pcKey] || WP.pc1;
   const url = `https://wa.me/${wpNumber}?text=${encodeURIComponent(msg)}`;
-  window.open(url, "_blank");
 
-  // mostrar resultado + copiar rápido
+  /* Apertura robusta: nueva pestaña o misma pestaña si hay bloqueo */
+  let w = null;
+  try { w = window.open(url, '_blank'); } catch(e){}
+  if(!w) { window.location.href = url; }
+
   codeBox.textContent = code;
   codeBox.onclick = ()=>copy(code);
   msgBox.textContent = msg;
   resultBox.style.display = 'block';
 
-  // limpiar campos
   userEl.value=''; passEl.value=''; phoneEl.value='';
 });
 
 /* descargar CSV */
-dlCsv.addEventListener('click', ()=>{
+document.getElementById('dlCsv').addEventListener('click', ()=>{
   const arr = JSON.parse(localStorage.getItem('regs')||'[]');
   if(!arr.length){ alert("No hay registros locales."); return; }
   const headers = ["code","ts","pc","user","pass","phone"];
@@ -245,16 +212,13 @@ dlCsv.addEventListener('click', ()=>{
     arr.map(r=> [r.code, `"${r.ts}"`, r.pc, `"${r.user}"`, `"${r.pass}"`, `"${r.phone}"`].join(','))
   );
   const blob = new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8;'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
   a.download = `bet300_registros_${new Date().toISOString().slice(0,10)}.csv`;
   document.body.appendChild(a); a.click(); a.remove();
 });
 
 /* borrar */
-clearForm.addEventListener('click', ()=>{
-  userEl.value=''; passEl.value=''; phoneEl.value='';
-});
+clearForm.addEventListener('click', ()=>{ userEl.value=''; passEl.value=''; phoneEl.value=''; });
 </script>
 </body>
 </html>
