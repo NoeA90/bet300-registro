@@ -64,8 +64,7 @@
 
       <div class="pills">
         <span class="pill lock">🔒 Autogestión disponible</span>
-        <span class="pill">💬 Soporte dentro de la plataforma</span>
-        <span class="pill">🎉 +30% 1ª carga</span>
+        
       </div>
 
       <!-- FORM -->
@@ -73,13 +72,13 @@
       <input id="name" type="text" inputmode="text" autocomplete="off"
              placeholder="Ej: Nico / Lau / ElTurco"/>
 
-      <button id="btnRegister" class="btn primary">🎁 Registrarse</button>
+      <button id="btnRegister" class="btn primary"> Registrarse</button>
 
       <p class="note">
         El operador asignará tu contraseña (podés editarla luego) y te enviará el link de acceso.
       </p>
 
-      <button id="btnPlatform" class="btn secondary">🎮 Ingresar a la plataforma</button>
+      <button id="btnPlatform" class="btn secondary"> Ingresar a la plataforma</button>
 
       <!-- BANNER (mismo directorio, 900×260 recomendado) -->
       <div class="bannerWrap">
@@ -119,7 +118,7 @@ document.getElementById('btnRegister').onclick = () => {
   const name = (document.getElementById('name').value || '').trim();
   if (!name) { alert('Escribí tu nombre o apodo.'); return; }
 
-  const msg = `Hola! Quiero registrarme en BET300.%0A• Nombre/Apodo: ${encodeURIComponent(name)}%0A• PC: ${pcKey}%0A%0A¿Me crean el usuario y me envían el acceso?`;
+  const msg = `Hola! Quiero registrarme en BET300.%0A• Nombre/Apodo: ${encodeURIComponent(name)}%0A• ¿Me crean el usuario y me envían el acceso?`;
   const wa = `https://wa.me/${WHATS[pcKey]}?text=${msg}`;
   window.location.href = wa;
 };
