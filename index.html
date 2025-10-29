@@ -91,13 +91,13 @@
       <input id="name" type="text" inputmode="text" autocomplete="off"
              placeholder="Ej: Nico / Lau / ElTurco"/>
 
-      <button id="btnRegister" class="btn primary">🎁 Registrarse</button>
+      <button id="btnRegister" class="btn primary"> REGISTRARSE</button>
 
       <p class="note">
-        El operador asignará tu contraseña (podés editarla luego) y te enviará el link de acceso.
+        El operador asignará tu contraseña (podés editarla luego) y accedes al 30% extra con tu primera carga.
       </p>
 
-      <button id="btnPlatform" class="btn secondary">🎮 Ingresar a la plataforma</button>
+      <button id="btnPlatform" class="btn secondary"> Ingresar a la plataforma</button>
 
       <!-- BANNER (mismo directorio, 900×260 recomendado) -->
       <div class="bannerWrap">
@@ -116,15 +116,15 @@ const pc = params.get('pc') || '1';
 const pcKey = ['1','2','3','4'].includes(pc) ? pc : '1';
 
 const PLATFORM = {
-  '1': 'https://bet300.site/html/primer-ingreso',
-  '2': 'https://bet300.site/html/primer-ingreso',
-  '3': 'https://bet300.site/html/primer-ingreso',
-  '4': 'https://bet300.site/html/primer-ingreso'
+  '1': 'https://bet300.biz',
+  '2': 'https://bet300.biz',
+  '3': 'https://bet300.biz',
+  '4': 'https://bet300.biz'
 };
 const WHATS = {
-  '1': '5491171561685',
-  '2': '5491171561022',
-  '3': '5491171331067',
+  '1': '5491171394738',
+  '2': '5491132406148',
+  '3': '5491132422571',
   '4': '5491135854862'
 };
 
@@ -137,7 +137,7 @@ document.getElementById('btnRegister').onclick = () => {
   const name = (document.getElementById('name').value || '').trim();
   if (!name) { alert('Escribí tu nombre o apodo.'); return; }
 
-  const msg = `Hola! Quiero registrarme en BET300.%0A• Nombre/Apodo: ${encodeURIComponent(name)}%0A• ¿Me crean el usuario y me envían el acceso?`;
+  const msg = `Hola! Quiero registrarme en BET300.%0A• Nombre/Apodo: ${encodeURIComponent(name)}%0A• Promo Activa: 30% extra con mi carga`;
   const wa = `https://wa.me/${WHATS[pcKey]}?text=${msg}`;
   window.location.href = wa;
 };
