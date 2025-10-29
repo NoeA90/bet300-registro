@@ -21,7 +21,6 @@
   }
   main{display:flex;flex-direction:column;min-height:100vh;justify-content:center;align-items:center;padding:20px}
   .card{background:var(--panel2);border:1px solid var(--border);border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,.35);padding:24px;width:100%;max-width:380px;text-align:center}
-  /* Logo imagen + fallback texto */
   .logoWrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:2px}
   .logoImg{width:min(74%,320px);height:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.25))}
   .logoText{font-weight:900;font-size:40px;letter-spacing:1px;display:none}
@@ -40,9 +39,9 @@
 <main>
   <div class="card">
     <div class="logoWrap">
-      <!-- Cambiá el src si lo alojás en otro lugar -->
-      <img id="brandImg" class="logoImg" src="/assets/bet300-logo.png" alt="BET300" />
-      <!-- Fallback visible solo si la imagen falla -->
+      <!-- Ruta corregida para GitHub o Vercel (imagen en misma carpeta que index.html) -->
+      <img id="brandImg" class="logoImg" src="bet300-logo.png" alt="BET300" />
+      <!-- Texto fallback si falla -->
       <div id="brandTxt" class="logoText">BET <span>300</span></div>
     </div>
 
@@ -61,49 +60,50 @@
 </main>
 
 <script>
-/* Fallback a texto si no carga el logo */
-(function(){
-  const img = document.getElementById('brandImg');
-  const txt = document.getElementById('brandTxt');
-  img.addEventListener('error', ()=>{ img.style.display='none'; txt.style.display='block'; });
-  // Si tarda en cargar mucho, mostramos texto como respaldo
-  setTimeout(()=>{ if(!img.complete) { img.style.display='none'; txt.style.display='block'; }}, 3000);
-})();
+  // Mostrar texto si no carga el logo
+  (function(){
+    const img = document.getElementById('brandImg');
+    const txt = document.getElementById('brandTxt');
+    img.addEventListener('load', ()=>{ txt.style.display='none'; img.style.display='block'; });
+    img.addEventListener('error',()=>{ img.style.display='none'; txt.style.display='block'; });
+    txt.style.display='block'; img.style.display='none';
+    img.src = img.getAttribute('src');
+  })();
 
-/* WhatsApp por PC */
-const PC_NUMBERS={1:"1171561685",2:"1171561022",3:"1171331067",4:"1135854862"};
-function buildAR(n){ n=(n||"").replace(/\D/g,""); return "54911"+n.slice(2); }
-const q=new URLSearchParams(location.search);
-const pc=["1","2","3","4"].includes(q.get("pc"))?q.get("pc"):"1";
-const wp=buildAR(PC_NUMBERS[pc]);
+  // Configuración de los WhatsApp por PC
+  const PC_NUMBERS={1:"1171561685",2:"1171561022",3:"1171331067",4:"1135854862"};
+  function buildAR(n){ n=(n||"").replace(/\D/g,""); return "54911"+n.slice(2); }
+  const q=new URLSearchParams(location.search);
+  const pc=["1","2","3","4"].includes(q.get("pc"))?q.get("pc"):"1";
+  const wp=buildAR(PC_NUMBERS[pc]);
 
-/* Utilidades */
-async function hash(t){
-  const e=new TextEncoder().encode(t);
-  const b=await crypto.subtle.digest("SHA-256",e);
-  return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");
-}
-function ts(){
-  const d=new Date(),f=x=>String(x).padStart(2,"0");
-  return `${f(d.getDate())}/${f(d.getMonth()+1)}/${d.getFullYear()} ${f(d.getHours())}:${f(d.getMinutes())}`;
-}
-function openWA(phone,msg){
-  location.href=`https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(msg)}`;
-}
+  // Utilidades
+  async function hash(t){
+    const e=new TextEncoder().encode(t);
+    const b=await crypto.subtle.digest("SHA-256",e);
+    return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");
+  }
+  function ts(){
+    const d=new Date(),f=x=>String(x).padStart(2,"0");
+    return `${f(d.getDate())}/${f(d.getMonth()+1)}/${d.getFullYear()} ${f(d.getHours())}:${f(d.getMinutes())}`;
+  }
+  function openWA(phone,msg){
+    location.href=`https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(msg)}`;
+  }
 
-/* Submit */
-const form=document.getElementById("regForm");
-form.addEventListener("submit", async (e)=>{
-  e.preventDefault();
-  const n=document.getElementById("name").value.trim();
-  if(n.length<2){ alert("Ingresá un nombre o apodo válido."); return; }
-  const h=(await hash(`${n}|${pc}|${ts()}`)).slice(0,10).toUpperCase();
-  const msg=`Hola 👋, quiero crear usuario en la plataforma.\n• PC: ${pc}\n• Nombre/Apodo: ${n}\n• Hash: ${h}\n——————————————\nPor favor generen el acceso y compartan el link.`;
-  const btn=form.querySelector(".btn");
-  btn.disabled=true; btn.textContent="Abriendo WhatsApp…";
-  openWA(wp,msg);
-  setTimeout(()=>{ btn.disabled=false; btn.textContent="🎁 Registrarse"; }, 3500);
-});
+  // Envío del formulario
+  const form=document.getElementById("regForm");
+  form.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const n=document.getElementById("name").value.trim();
+    if(n.length<2){ alert("Ingresá un nombre o apodo válido."); return; }
+    const h=(await hash(`${n}|${pc}|${ts()}`)).slice(0,10).toUpperCase();
+    const msg=`Hola 👋, quiero crear usuario en la plataforma.\n• PC: ${pc}\n• Nombre/Apodo: ${n}\n• Hash: ${h}\n——————————————\nPor favor generen el acceso y compartan el link.`;
+    const btn=form.querySelector(".btn");
+    btn.disabled=true; btn.textContent="Abriendo WhatsApp…";
+    openWA(wp,msg);
+    setTimeout(()=>{ btn.disabled=false; btn.textContent="🎁 Registrarse"; }, 3500);
+  });
 </script>
 </body>
 </html>
