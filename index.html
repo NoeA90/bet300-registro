@@ -2,172 +2,127 @@
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BET300 · Registro</title>
-<meta name="theme-color" content="#0b1020"/>
+<meta name="theme-color" content="#0b1120" />
 <style>
   :root{
-    --bg:#0b1020; 
-    --panel:#111735; 
-    --border:#1f2a4d;
-    --text:#e9ecff; 
-    --muted:#aab0d6;
-    --brand:#f0c86a; 
-    --brand2:#f7d887;
-    --btn-bg:#1a203f;
-    --btn-hover:#242b55;
+    --bg:#0b1120; --panel:#0f172a; --panel2:#0b1326; --border:#1e2a4a;
+    --text:#e8ecff; --muted:#9aa3c7; --accent:#49b6ff; --gold:#e8c25e;
+    --ok:#25d366;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{
-    height:100%;
-    font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto;
-    background:var(--bg);
-    color:var(--text);
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto}
+  .wrap{max-width:760px;margin:28px auto;padding:0 16px}
+  .card{background:var(--panel);border:1px solid var(--border);
+        border-radius:18px;padding:22px 18px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+  .brandBox{display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+  .logoImg{height:54px;display:block}
+  .brandText{font-weight:900;letter-spacing:.8px;font-size:38px;
+             background:linear-gradient(180deg,#fff,#f6e6b0 65%,#caa94b);
+             -webkit-background-clip:text;background-clip:text;color:transparent}
+  h1{margin:6px 0 14px;font-size:28px;text-align:center}
+  .pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+  .pill{display:inline-flex;gap:8px;align-items:center;
+        padding:8px 12px;border-radius:999px;font-size:13px;color:var(--text);
+        background:rgba(73,182,255,.12);border:1px solid var(--border)}
+  .pill.lock{background:rgba(255,199,0,.12)}
+  label{display:block;margin:10px 2px 6px;color:var(--muted);font-size:14px}
+  input{width:100%;padding:14px 14px;border-radius:12px;border:1px solid var(--border);
+        background:#0b152d;color:var(--text);outline:none}
+  input::placeholder{color:#8590b0}
+  .btn{width:100%;appearance:none;border:none;border-radius:14px;
+       padding:15px 16px;font-weight:800;margin-top:14px;cursor:pointer}
+  .btn.primary{
+    color:#09121f;
+    background:linear-gradient(90deg,#ffd48a,#e9b84f);
+    box-shadow:0 10px 26px rgba(233,184,79,.25);
   }
-  main{
-    display:flex;
-    flex-direction:column;
-    min-height:100vh;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-  }
-  .card{
-    background:#0f1430;
-    border:1px solid var(--border);
-    border-radius:18px;
-    box-shadow:0 16px 40px rgba(0,0,0,.35);
-    padding:24px;
-    width:100%;
-    max-width:380px;
-    text-align:center;
-  }
-  .logoText{
-    font-weight:900;
-    font-size:40px;
-    letter-spacing:1px;
-    margin-bottom:6px;
-  }
-  .logoText span{
-    background:linear-gradient(90deg,var(--brand),var(--brand2));
-    -webkit-background-clip:text;
-    color:transparent;
-  }
-  h1{font-size:20px;margin-top:4px;}
-  .note{
-    color:var(--muted);
-    font-size:13px;
-    margin:8px 0 18px;
-  }
-  .pill{
-    display:inline-block;
-    background:rgba(255,255,255,.08);
-    padding:4px 10px;
-    border-radius:999px;
-    font-size:12px;
-    margin-bottom:8px;
-  }
-  label{
-    display:block;
-    text-align:left;
-    font-size:13px;
-    color:var(--muted);
-    margin-bottom:6px;
-  }
-  .input{
-    width:100%;
-    padding:12px 14px;
-    border-radius:12px;
-    border:1px solid var(--border);
-    background:var(--panel);
-    color:var(--text);
-  }
-  .btn{
-    width:100%;
-    padding:13px 16px;
-    margin-top:14px;
-    border:none;
-    border-radius:14px;
-    font-weight:700;
-    cursor:pointer;
-    color:#fff;
-    background:var(--btn-bg);
-    box-shadow:0 0 10px rgba(0,0,0,.4);
-    transition:.2s;
-  }
-  .btn:hover{background:var(--btn-hover);}
+  .note{margin:14px 2px 10px;color:var(--muted);text-align:center}
   .btn.secondary{
-    margin-top:10px;
-    background:#20264a;
+    color:#07131e;background:#1fbf61;border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 10px 26px rgba(31,191,97,.25);margin-top:10px
   }
-  .footer{
-    margin-top:auto;
-    text-align:center;
-    font-size:12px;
-    color:var(--muted);
-    padding:10px 0;
-  }
+  .bannerWrap{margin-top:18px;text-align:center}
+  .bannerImg{width:100%;max-width:480px;border-radius:12px;
+             box-shadow:0 8px 24px rgba(0,0,0,.35)}
+  footer{color:var(--muted);text-align:center;margin:20px 0 6px;font-size:13px}
 </style>
 </head>
 <body>
-<main>
-  <div class="card">
-    <div class="logoText">BET <span>300</span></div>
-    <h1>Registro</h1>
-    <div class="pill">🔒 Autogestión disponible</div>
-    <p class="note">Soporte dentro de la plataforma • <b style="color:#bfefff">+30% 1ª carga</b></p>
+  <div class="wrap">
+    <div class="card">
+      <!-- LOGO (mismo directorio que index.html) -->
+      <div class="brandBox">
+        <img id="brandImg" class="logoImg" src="bet300-logo.png" alt="BET300"
+             onerror="this.remove();document.getElementById('brandText').style.display='block'">
+        <div id="brandText" class="brandText" style="display:none">BET300</div>
+      </div>
 
-    <form id="regForm" autocomplete="off">
+      <h1>Registro</h1>
+
+      <div class="pills">
+        <span class="pill lock">🔒 Autogestión disponible</span>
+        <span class="pill">💬 Soporte dentro de la plataforma</span>
+        <span class="pill">🎉 +30% 1ª carga</span>
+      </div>
+
+      <!-- FORM -->
       <label for="name">Nombre o apodo</label>
-      <input id="name" class="input" type="text" placeholder="Ej: Nico / Lau / ElTurco" required minlength="2" maxlength="40">
+      <input id="name" type="text" inputmode="text" autocomplete="off"
+             placeholder="Ej: Nico / Lau / ElTurco"/>
 
-      <button type="submit" class="btn">🎁 Registrarse</button>
+      <button id="btnRegister" class="btn primary">🎁 Registrarse</button>
 
-      <p class="note" style="margin-top:12px">
-        El operador asignará tu contraseña (podés editarla luego) y te enviará el link de acceso
+      <p class="note">
+        El operador asignará tu contraseña (podés editarla luego) y te enviará el link de acceso.
       </p>
 
-      <!-- NUEVO: Botón de ingreso debajo del texto -->
-      <a href="https://bet300.site/html/principal.html" class="btn secondary">
-        🎮 Ingresar a la plataforma
-      </a>
-    </form>
+      <button id="btnPlatform" class="btn secondary">🎮 Ingresar a la plataforma</button>
+
+      <!-- BANNER (mismo directorio, 900×260 recomendado) -->
+      <div class="bannerWrap">
+        <img class="bannerImg" src="banner-900x260.jpg" alt="BET300 Promo"
+             onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <footer>BET300 © — Todos los derechos reservados.</footer>
   </div>
-  <div class="footer">BET300 © — Todos los derechos reservados.</div>
-</main>
 
 <script>
-const PC_NUMBERS={1:"1171561685",2:"1171561022",3:"1171331067",4:"1135854862"};
-function buildAR(n){n=(n||"").replace(/\D/g,"");return"54911"+n.slice(2);}
-const p=new URLSearchParams(location.search);
-const pc=["1","2","3","4"].includes(p.get("pc"))?p.get("pc"):"1";
-const wp=buildAR(PC_NUMBERS[pc]);
+/* ===== Ruteo por PC (?pc=1|2|3|4) ===== */
+const params = new URLSearchParams(location.search);
+const pc = params.get('pc') || '1';
+const pcKey = ['1','2','3','4'].includes(pc) ? pc : '1';
 
-async function hash(t){
-  const e=new TextEncoder().encode(t);
-  const b=await crypto.subtle.digest("SHA-256",e);
-  return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");
-}
-function ts(){
-  const d=new Date(),f=x=>String(x).padStart(2,"0");
-  return `${f(d.getDate())}/${f(d.getMonth()+1)}/${d.getFullYear()} ${f(d.getHours())}:${f(d.getMinutes())}`;
-}
-function openWA(phone,msg){
-  location.href=`https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(msg)}`;
-}
+const PLATFORM = {
+  '1': 'https://bet300.site/html/primer-ingreso',   // reemplazá si hace falta
+  '2': 'https://bet300.site/html/primer-ingreso',
+  '3': 'https://bet300.site/html/primer-ingreso',
+  '4': 'https://bet300.site/html/primer-ingreso'
+};
+const WHATS = {
+  '1': '5491171561685',
+  '2': '5491171561022',
+  '3': '5491171331067',
+  '4': '5491135854862'
+};
 
-const f=document.getElementById("regForm");
-f.addEventListener("submit",async e=>{
-  e.preventDefault();
-  const n=document.getElementById("name").value.trim();
-  if(n.length<2){alert("Ingresá un nombre o apodo válido.");return;}
-  const h=(await hash(`${n}|${pc}|${ts()}`)).slice(0,10).toUpperCase();
-  const msg=`Hola 👋, quiero crear usuario en la plataforma.\n• PC: ${pc}\n• Nombre/Apodo: ${n}\n• Hash: ${h}\n——————————————\nPor favor generen el acceso y compartan el link.`;
-  const btn=f.querySelector(".btn");
-  btn.disabled=true;btn.textContent="Abriendo WhatsApp…";
-  openWA(wp,msg);
-  setTimeout(()=>{btn.disabled=false;btn.textContent="🎁 Registrarse";},3500);
-});
+document.getElementById('btnPlatform').onclick = () => {
+  window.location.href = PLATFORM[pcKey];
+};
+
+/* Registro: envía a WhatsApp del PC con mensaje estandar */
+document.getElementById('btnRegister').onclick = () => {
+  const name = (document.getElementById('name').value || '').trim();
+  if (!name) { alert('Escribí tu nombre o apodo.'); return; }
+
+  const msg = `Hola! Quiero registrarme en BET300.%0A• Nombre/Apodo: ${encodeURIComponent(name)}%0A• PC: ${pcKey}%0A%0A¿Me crean el usuario y me envían el acceso?`;
+  const wa = `https://wa.me/${WHATS[pcKey]}?text=${msg}`;
+  window.location.href = wa;
+};
 </script>
 </body>
 </html>
