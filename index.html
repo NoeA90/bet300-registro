@@ -191,9 +191,8 @@ sendBtn.addEventListener('click', ()=>{
   const url = `https://wa.me/${wpNumber}?text=${encodeURIComponent(msg)}`;
 
   /* Apertura robusta: nueva pestaña o misma pestaña si hay bloqueo */
-  let w = null;
-  try { w = window.open(url, '_blank'); } catch(e){}
-  if(!w) { window.location.href = url; }
+  window.location.href = url;
+
 
   codeBox.textContent = code;
   codeBox.onclick = ()=>copy(code);
