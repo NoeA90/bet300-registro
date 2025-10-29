@@ -69,7 +69,7 @@
       </svg>
     </div>
 
-    <h1>Registrate para ingresar</h1>
+    <h1>Registro</h1>
     <p class="note">
       <span class="pill">🔒 Autogestión disponible</span>
       &nbsp;•&nbsp; Soporte dentro de la plataforma
@@ -90,9 +90,7 @@
       El operador asignará tu contraseña (podes editarla luego) y te enviará el link de acceso 
     </p>
 
-    <p class="note" style="font-size:12px;margin-top:6px">
-      Usá el link con <code>?pc=1</code>, <code>?pc=2</code>, <code>?pc=3</code> o <code>?pc=4</code> para enviar al WhatsApp correcto.
-    </p>
+   
   </div>
 
   <div class="footer">
@@ -166,11 +164,10 @@ f.addEventListener("submit", async (e)=>{
 
   const texto =
 `Hola 👋, quiero crear usuario en la plataforma.
-• PC: ${pc}
 • Nombre/Apodo: ${name}
 • Hash: ${hash}
 ——————————————
-Por favor generen el acceso y compartan el link.`;
+Tengn 30% Extra en mi primera carga.`;
 
   const btn = f.querySelector('.btn.primary');
   btn.disabled = true; btn.textContent = "Abriendo WhatsApp…";
