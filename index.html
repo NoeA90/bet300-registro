@@ -7,57 +7,112 @@
 <meta name="theme-color" content="#0b1020"/>
 <style>
   :root{
-    --bg:#0b1020; --panel:#111735; --panel2:#0d1330; --border:#212a57;
-    --text:#e9ecff; --muted:#aab0d6;
-    --brand:#f0c86a; --brand2:#f7d887;
-    /* Celeste neón */
-    --neo1:#33e3ff; --neo2:#00b7ff; --neoglow:0 0 20px rgba(0,183,255,.55), 0 8px 24px rgba(0,183,255,.25);
+    --bg:#0b1020; 
+    --panel:#111735; 
+    --border:#1f2a4d;
+    --text:#e9ecff; 
+    --muted:#aab0d6;
+    --brand:#f0c86a; 
+    --brand2:#f7d887;
+    --btn-bg:#1a203f;
+    --btn-hover:#242b55;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto;background:var(--bg);color:var(--text);}
-  body::before{
-    content:"";position:fixed;inset:0;z-index:-1;
-    background:radial-gradient(900px 500px at 85% -10%,rgba(124,77,255,.18),transparent),
-               radial-gradient(700px 350px at 0% 0%,rgba(0,209,255,.12),transparent),
-               linear-gradient(180deg,#0b1020 0%,#0b1020 60%,#0a0f1f 100%);
+  html,body{
+    height:100%;
+    font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto;
+    background:var(--bg);
+    color:var(--text);
   }
-  main{display:flex;flex-direction:column;min-height:100vh;justify-content:center;align-items:center;padding:20px}
-  .card{background:var(--panel2);border:1px solid var(--border);border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,.35);padding:24px;width:100%;max-width:380px;text-align:center}
-  .logoWrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:2px}
-  .logoImg{width:min(74%,320px);height:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.25))}
-  .logoText{font-weight:900;font-size:40px;letter-spacing:1px;display:none}
-  .logoText span{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;color:transparent}
-  h1{font-size:20px;margin-top:4px}
-  .note{color:var(--muted);font-size:13px;margin:8px 0 18px}
-  .pill{display:inline-block;background:rgba(255,255,255,.08);padding:4px 10px;border-radius:999px;font-size:12px;margin-bottom:8px}
-  label{display:block;text-align:left;font-size:13px;color:var(--muted);margin-bottom:6px}
-  .input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel);color:var(--text);}
-
-  /* Botones: celeste neón */
-  .btn{width:100%;padding:13px 16px;border:none;border-radius:14px;font-weight:900;cursor:pointer;color:#001018;
-       background:linear-gradient(90deg,var(--neo1),var(--neo2));box-shadow:var(--neoglow);transition:transform .15s ease, box-shadow .2s ease, filter .2s ease}
-  .btn:hover{transform:translateY(-1px);filter:saturate(1.1);box-shadow:0 0 26px rgba(0,183,255,.65), 0 10px 28px rgba(0,183,255,.28)}
-  .btn.secondary{margin-top:10px}
-
-  .footer{margin-top:auto;text-align:center;font-size:12px;color:var(--muted);padding:10px 0}
-
-  /* Animaciones */
-  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes slideGlow{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-  .a-logo{animation:fadeUp .55s ease-out both}
-  .a-btn{animation:slideGlow .45s .15s ease-out both}
-  .a-btn2{animation:slideGlow .45s .28s ease-out both}
+  main{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+  }
+  .card{
+    background:#0f1430;
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 16px 40px rgba(0,0,0,.35);
+    padding:24px;
+    width:100%;
+    max-width:380px;
+    text-align:center;
+  }
+  .logoText{
+    font-weight:900;
+    font-size:40px;
+    letter-spacing:1px;
+    margin-bottom:6px;
+  }
+  .logoText span{
+    background:linear-gradient(90deg,var(--brand),var(--brand2));
+    -webkit-background-clip:text;
+    color:transparent;
+  }
+  h1{font-size:20px;margin-top:4px;}
+  .note{
+    color:var(--muted);
+    font-size:13px;
+    margin:8px 0 18px;
+  }
+  .pill{
+    display:inline-block;
+    background:rgba(255,255,255,.08);
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:12px;
+    margin-bottom:8px;
+  }
+  label{
+    display:block;
+    text-align:left;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .input{
+    width:100%;
+    padding:12px 14px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:var(--text);
+  }
+  .btn{
+    width:100%;
+    padding:13px 16px;
+    margin-top:14px;
+    border:none;
+    border-radius:14px;
+    font-weight:700;
+    cursor:pointer;
+    color:#fff;
+    background:var(--btn-bg);
+    box-shadow:0 0 10px rgba(0,0,0,.4);
+    transition:.2s;
+  }
+  .btn:hover{background:var(--btn-hover);}
+  .btn.secondary{
+    margin-top:10px;
+    background:#20264a;
+  }
+  .footer{
+    margin-top:auto;
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+    padding:10px 0;
+  }
 </style>
 </head>
 <body>
 <main>
   <div class="card">
-    <div class="logoWrap a-logo">
-      <!-- Imagen local (misma carpeta que index.html). Muestra texto si falla -->
-      <img id="brandImg" class="logoImg" src="bet300-logo.png" alt="BET300" />
-      <div id="brandTxt" class="logoText">BET <span>300</span></div>
-    </div>
-
+    <div class="logoText">BET <span>300</span></div>
     <h1>Registro</h1>
     <div class="pill">🔒 Autogestión disponible</div>
     <p class="note">Soporte dentro de la plataforma • <b style="color:#bfefff">+30% 1ª carga</b></p>
@@ -65,60 +120,54 @@
     <form id="regForm" autocomplete="off">
       <label for="name">Nombre o apodo</label>
       <input id="name" class="input" type="text" placeholder="Ej: Nico / Lau / ElTurco" required minlength="2" maxlength="40">
-      <button type="submit" class="btn a-btn">🎁 Registrarse</button>
-      <!-- Botón a la plataforma -->
-      <a class="btn secondary a-btn2" href="https://bet300.biz" target="_blank" rel="noopener">🎮 Ingresar a la plataforma</a>
-      <p class="note" style="margin-top:10px">El operador asignará tu contraseña (podés editarla luego) y te enviará el link de acceso</p>
+
+      <button type="submit" class="btn">🎁 Registrarse</button>
+
+      <p class="note" style="margin-top:12px">
+        El operador asignará tu contraseña (podés editarla luego) y te enviará el link de acceso
+      </p>
+
+      <!-- NUEVO: Botón de ingreso debajo del texto -->
+      <a href="https://bet300.site/html/principal.html" class="btn secondary">
+        🎮 Ingresar a la plataforma
+      </a>
     </form>
   </div>
   <div class="footer">BET300 © — Todos los derechos reservados.</div>
 </main>
 
 <script>
-  // Fallback si el logo no carga
-  (function(){
-    const img = document.getElementById('brandImg');
-    const txt = document.getElementById('brandTxt');
-    img.addEventListener('load', ()=>{ txt.style.display='none'; img.style.display='block'; });
-    img.addEventListener('error',()=>{ img.style.display='none'; txt.style.display='block'; });
-    txt.style.display='block'; img.style.display='none';
-    img.src = img.getAttribute('src');
-  })();
+const PC_NUMBERS={1:"1171561685",2:"1171561022",3:"1171331067",4:"1135854862"};
+function buildAR(n){n=(n||"").replace(/\D/g,"");return"54911"+n.slice(2);}
+const p=new URLSearchParams(location.search);
+const pc=["1","2","3","4"].includes(p.get("pc"))?p.get("pc"):"1";
+const wp=buildAR(PC_NUMBERS[pc]);
 
-  // WhatsApp por PC (?pc=1..4)
-  const PC_NUMBERS={1:"1171561685",2:"1171561022",3:"1171331067",4:"1135854862"};
-  function buildAR(n){ n=(n||"").replace(/\D/g,""); return "54911"+n.slice(2); }
-  const q=new URLSearchParams(location.search);
-  const pc=["1","2","3","4"].includes(q.get("pc"))?q.get("pc"):"1";
-  const wp=buildAR(PC_NUMBERS[pc]);
+async function hash(t){
+  const e=new TextEncoder().encode(t);
+  const b=await crypto.subtle.digest("SHA-256",e);
+  return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+function ts(){
+  const d=new Date(),f=x=>String(x).padStart(2,"0");
+  return `${f(d.getDate())}/${f(d.getMonth()+1)}/${d.getFullYear()} ${f(d.getHours())}:${f(d.getMinutes())}`;
+}
+function openWA(phone,msg){
+  location.href=`https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(msg)}`;
+}
 
-  // Helpers
-  async function hash(t){
-    const e=new TextEncoder().encode(t);
-    const b=await crypto.subtle.digest("SHA-256",e);
-    return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");
-  }
-  function ts(){
-    const d=new Date(),f=x=>String(x).padStart(2,"0");
-    return `${f(d.getDate())}/${f(d.getMonth()+1)}/${d.getFullYear()} ${f(d.getHours())}:${f(d.getMinutes())}`;
-  }
-  function openWA(phone,msg){
-    location.href=`https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(msg)}`;
-  }
-
-  // Envío del formulario
-  const form=document.getElementById("regForm");
-  form.addEventListener("submit", async (e)=>{
-    e.preventDefault();
-    const n=document.getElementById("name").value.trim();
-    if(n.length<2){ alert("Ingresá un nombre o apodo válido."); return; }
-    const h=(await hash(`${n}|${pc}|${ts()}`)).slice(0,10).toUpperCase();
-    const msg=`Hola 👋, quiero crear usuario en la plataforma.\n• PC: ${pc}\n• Nombre/Apodo: ${n}\n• Hash: ${h}\n——————————————\nPor favor generen el acceso y compartan el link.`;
-    const btn=form.querySelector(".btn");
-    btn.disabled=true; btn.textContent="Abriendo WhatsApp…";
-    openWA(wp,msg);
-    setTimeout(()=>{ btn.disabled=false; btn.textContent="🎁 Registrarse"; }, 3500);
-  });
+const f=document.getElementById("regForm");
+f.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const n=document.getElementById("name").value.trim();
+  if(n.length<2){alert("Ingresá un nombre o apodo válido.");return;}
+  const h=(await hash(`${n}|${pc}|${ts()}`)).slice(0,10).toUpperCase();
+  const msg=`Hola 👋, quiero crear usuario en la plataforma.\n• PC: ${pc}\n• Nombre/Apodo: ${n}\n• Hash: ${h}\n——————————————\nPor favor generen el acceso y compartan el link.`;
+  const btn=f.querySelector(".btn");
+  btn.disabled=true;btn.textContent="Abriendo WhatsApp…";
+  openWA(wp,msg);
+  setTimeout(()=>{btn.disabled=false;btn.textContent="🎁 Registrarse";},3500);
+});
 </script>
 </body>
 </html>
