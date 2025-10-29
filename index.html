@@ -9,9 +9,7 @@
   :root{
     --bg:#0b1020; --panel:#111735; --panel2:#0d1330; --border:#212a57;
     --text:#e9ecff; --muted:#aab0d6; --ok:#25D366;
-    --brand:#f0c86a; /* mostaza del logo */
-    --brand2:#f7d887;
-    --accent:#7c59ff; --cyan:#22d3ee;
+    --brand:#f0c86a; --brand2:#f7d887; /* mostaza del logo */
   }
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -38,8 +36,6 @@
     width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);
     background:var(--panel);color:var(--text);outline:none
   }
-  .row{display:grid;gap:12px}
-  @media(min-width:640px){ .row{grid-template-columns:1fr 1fr} }
 
   .btn{
     appearance:none;border:none;cursor:pointer;width:100%;
@@ -50,17 +46,8 @@
     background:linear-gradient(90deg,var(--brand),var(--brand2));
     border:1px solid rgba(255,255,255,.06)
   }
-  .btn.ghost{
-    background:transparent;color:var(--text);border:1px solid var(--border)
-  }
-  .btn.ok{background:var(--ok);color:#0b0f1e}
 
-  .actions{display:grid;gap:10px;margin-top:8px}
-  @media(min-width:640px){ .actions{grid-template-columns:1fr 1fr 1fr} }
-
-  .hint{font-size:12px;color:var(--muted);margin-top:6px;text-align:center}
   .error{color:#ff7a7a;font-size:13px}
-
   .footer{margin-top:14px;display:flex;justify-content:center}
   .tiny{font-size:12px;color:var(--muted);text-align:center}
 </style>
@@ -69,7 +56,7 @@
 <div class="wrap">
   <div class="card">
     <div class="head">
-      <!-- Poné tu imagen si querés: <img class="logo" src="./logo-bet300.png" alt="BET300"> -->
+      <!-- Si querés, reemplazá por tu imagen: <img class="logo" src="./logo-bet300.png" alt="BET300"> -->
       <svg class="logo" viewBox="0 0 420 120" aria-label="BET300">
         <defs>
           <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
@@ -81,6 +68,7 @@
         <text x="180" y="82" font-size="88" font-family="system-ui,Segoe UI,Roboto" fill="url(#g)" font-weight="900">300</text>
       </svg>
     </div>
+
     <h1>Registrate para ingresar</h1>
     <p class="note">
       <span class="pill">🔒 Autogestión disponible</span>
@@ -90,52 +78,41 @@
 
     <form id="regForm" class="form" autocomplete="off">
       <div>
-        <label for="user">Usuario</label>
-        <input id="user" class="input" type="text" name="user" minlength="3" maxlength="24" placeholder="tu-usuario" required />
+        <label for="name">Nombre o apodo</label>
+        <input id="name" class="input" type="text" name="name" minlength="2" maxlength="40" placeholder="Ej: Nico / Lau / ElTurco" required />
       </div>
-
-      <div>
-        <label for="pass">Contraseña</label>
-        <input id="pass" class="input" type="password" name="pass" minlength="4" maxlength="24" placeholder="••••••" required />
-      </div>
-
-      <div>
-        <label for="tel">Teléfono (solo números)</label>
-        <input id="tel" class="input" type="tel" name="tel" pattern="[0-9]{6,14}" inputmode="numeric" placeholder="11xxxxxxxx" required />
-      </div>
-
       <div id="err" class="error" role="alert" style="display:none"></div>
 
-      <div class="actions">
-        <button type="submit" class="btn primary">🎁 Registrarse</button>
-        <button id="dlBtn" type="button" class="btn ghost">⬇️ Descargar registros</button>
-        <button id="clearBtn" type="button" class="btn ghost">🗑️ Borrar</button>
-      </div>
+      <button type="submit" class="btn primary">🎁 Registrarse</button>
     </form>
 
-    <p class="hint">Usá el link con <code>?pc=1</code>, <code>?pc=2</code>, <code>?pc=3</code> o <code>?pc=4</code> para que envíe al WhatsApp correcto.</p>
+    <p class="note" style="margin-top:10px">
+      El operador asignará tu contraseña y te enviará el acceso.
+    </p>
+
+    <p class="note" style="font-size:12px;margin-top:6px">
+      Usá el link con <code>?pc=1</code>, <code>?pc=2</code>, <code>?pc=3</code> o <code>?pc=4</code> para enviar al WhatsApp correcto.
+    </p>
   </div>
 
   <div class="footer">
-    <p class="tiny">BET300 © — Si el WhatsApp no abre, te redirigimos automáticamente con un método alternativo.</p>
+    <p class="tiny">BET300 © — Si WhatsApp no abre, reintentá en el navegador del sistema.</p>
   </div>
 </div>
 
 <script>
 /* ===========================
-   1) Configuración de destino
+   1) Configuración de destinos
    =========================== */
 const PC_NUMBERS = {
   1: "1171561685",
   2: "1171561022",
   3: "1134970581",
-  4: "1135854862" // PC4 solo slot/ruleta — igual lo dejamos para alta
+  4: "1135854862"
 };
-// Build E164 for AR: 54 + 9 + 11 + XXXXXXX  (los números que pasaste ya empiezan con 11)
+// Pasamos “11XXXXXXXX” a E.164 para WhatsApp (AR CABA)
 function buildAR(number11) {
-  // asegura 11 dígitos
   const n = (number11 || "").replace(/\D/g,"");
-  // WhatsApp para CABA: 54 9 11 + resto
   return "54911" + n.slice(2);
 }
 const params = new URLSearchParams(location.search);
@@ -153,23 +130,6 @@ function fmtTs(d=new Date()){
   const mi=String(d.getMinutes()).padStart(2,'0');
   return `${dd}/${mm}/${yyyy} ${hh}:${mi}`;
 }
-function saveRow(row){
-  const arr = JSON.parse(localStorage.getItem("bet300_regs")||"[]");
-  arr.push(row);
-  localStorage.setItem("bet300_regs", JSON.stringify(arr));
-}
-function downloadCSV(){
-  const arr = JSON.parse(localStorage.getItem("bet300_regs")||"[]");
-  if(!arr.length){ alert("No hay registros guardados en este dispositivo."); return; }
-  const head = ["timestamp","pc","usuario","telefono","hash"];
-  const rows = arr.map(o => [o.ts,o.pc,o.user,o.tel,o.hash]);
-  const csv = [head.join(","), ...rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(","))].join("\n");
-  const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `bet300_registros_${Date.now()}.csv`;
-  document.body.appendChild(a); a.click(); a.remove();
-}
 async function sha256hex(msg){
   const enc = new TextEncoder().encode(msg);
   const buf = await crypto.subtle.digest("SHA-256", enc);
@@ -177,60 +137,44 @@ async function sha256hex(msg){
 }
 
 /* ===========================
-   3) Envío a WhatsApp robusto
+   3) WhatsApp (redirección directa)
    =========================== */
 function openWhatsApp(phoneE164, text){
-  // Método 1 (universal y menos bloqueos)
   const url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneE164)}&text=${encodeURIComponent(text)}`;
-  // Forzar navegación (sin window.open)
   location.href = url;
 }
 
 /* ===========================
-   4) Manejadores UI
+   4) Formulario
    =========================== */
 const f = document.getElementById("regForm");
 const err = document.getElementById("err");
-document.getElementById("dlBtn").onclick = downloadCSV;
-document.getElementById("clearBtn").onclick = () => {
-  if(confirm("¿Borrar registros locales?")) localStorage.removeItem("bet300_regs");
-};
 
 f.addEventListener("submit", async (e)=>{
   e.preventDefault();
   err.style.display="none"; err.textContent="";
 
-  const user = document.getElementById("user").value.trim();
-  const pass = document.getElementById("pass").value.trim();
-  const tel  = document.getElementById("tel").value.replace(/\D/g,"");
+  const name = document.getElementById("name").value.trim();
+  if(name.length < 2){
+    err.textContent = "Ingresá un nombre o apodo válido.";
+    err.style.display = "block";
+    return;
+  }
 
-  // Validaciones simples
-  if(user.length<3){ err.textContent="El usuario debe tener al menos 3 caracteres."; err.style.display="block"; return; }
-  if(pass.length<4){ err.textContent="La contraseña debe tener al menos 4 caracteres."; err.style.display="block"; return; }
-  if(tel.length<6){ err.textContent="Ingresá un teléfono válido (solo números)."; err.style.display="block"; return; }
-
-  // Hash para control (se lo pasamos al operador en el mensaje)
-  const ts = fmtTs();
-  const hash = (await sha256hex(`${user}|${tel}|${pc}|${ts}`)).slice(0,10).toUpperCase();
-
-  // Guardar local (por si el user vuelve)
-  saveRow({ ts, pc, user, tel, hash });
+  const ts   = fmtTs();
+  const hash = (await sha256hex(`${name}|${pc}|${ts}`)).slice(0,10).toUpperCase();
 
   const texto =
-`Hola 👋, quiero crear usuario!
-• Usuario: ${user}
-• Teléfono: ${tel}
+`Hola 👋, quiero crear usuario en la plataforma.
+• PC: ${pc}
+• Nombre/Apodo: ${name}
 • Hash: ${hash}
 ——————————————
-Una vez creado, por favor enviame el link de acceso.`;
+Por favor generen el acceso y compartan el link.`;
 
-  // Abrir WhatsApp SIEMPRE (sin popups)
-  openWhatsApp(wpLocal, texto);
-
-  // Feedback mínimo
-  // (si el navegador tarda en abrir WA, al menos el botón no “queda colgado”)
   const btn = f.querySelector('.btn.primary');
   btn.disabled = true; btn.textContent = "Abriendo WhatsApp…";
+  openWhatsApp(wpLocal, texto);
   setTimeout(()=>{ btn.disabled = false; btn.textContent = "🎁 Registrarse"; }, 3500);
 });
 </script>
